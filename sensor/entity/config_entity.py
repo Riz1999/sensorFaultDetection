@@ -1,7 +1,8 @@
 
 from datetime import datetime
 import os
-from sensor.constant.training_pipeline  import PIPELINE_NAME,ARTIFACT_DIR
+from sensor.constant import training_pipeline
+from sensor.constant import training_pipeline  
 
 class TrainingPipelineConfig:
 
