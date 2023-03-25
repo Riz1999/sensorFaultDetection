@@ -25,7 +25,7 @@ class TrainPipeline:
     def start_data_ingestion(self)->DataIngestionArtifact:
          try: 
               logging.info("Starting data ingestion")
-              logging.info("data inegstion completed")
+              logging.info("data ingestion completed")
     #         self.data_ingestion_config = DataIngestionConfig(training_pipeline_config=self.training_pipeline_config)
     #         logging.info("Starting data ingestion")
     #         data_ingestion = DataIngestion(data_ingestion_config=self.data_ingestion_config)
