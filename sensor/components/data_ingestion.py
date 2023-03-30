@@ -1,11 +1,13 @@
+import os,sys
 from sensor.data_access.sensor_data import SensorData
 from sensor.exception import SensorException
 from sensor.logger import logging
 from sensor.entity.config_entity import DataIngestionConfig
 from sensor.entity.artifact_entity import DataIngestionArtifact
 #from sklearn.model_selection import train_test_split
-import os,sys
-from pandas import DataFrame
+from  pandas import DataFrame
+
+
 
 # from sensor.data_access.sensor_data import SensorData
 # from sensor.utils.main_utils import read_yaml_file
@@ -20,7 +22,6 @@ class DataIngestion:
             raise SensorException(e,sys)
 
     def export_data_into_feature_store(self) -> DataFrame:
-        pass
         """
         Export mongo db collection record as data frame into feature
         """
@@ -80,7 +81,7 @@ class DataIngestion:
              dataframe = self.export_data_into_feature_store()
             # dataframe = dataframe.drop(self._schema_config["drop_columns"],axis=1)
              self.split_data_as_train_test(dataframe=dataframe)
-             data_ingestion_artifact = DataIngestionArtifact(trained_file_path=self.data_ingestion_config.training_file_path,
+             data_ingestion_artifact = DataIngestionArtifact(self.data_ingestion_config.training_file_path,
              test_file_path=self.data_ingestion_config.testing_file_path)
              return data_ingestion_artifact
         except Exception as e:

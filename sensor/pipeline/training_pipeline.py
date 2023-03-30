@@ -33,7 +33,7 @@ class TrainPipeline:
          except  Exception as e:
              raise  SensorException(e,sys)
 
-    # def start_data_validaton(self,data_ingestion_artifact:DataIngestionArtifact)->DataValidationArtifact:
+#  def start_data_validaton(self,data_ingestion_artifact:DataIngestionArtifact)->DataValidationArtifact:
     #     try:
     #         data_validation_config = DataValidationConfig(training_pipeline_config=self.training_pipeline_config)
     #         data_validation = DataValidation(data_ingestion_artifact=data_ingestion_artifact,
@@ -89,16 +89,16 @@ class TrainPipeline:
              
     #         TrainPipeline.is_pipeline_running=True
 
-              data_ingestion_artifact:DataIngestionArtifact = self.start_data_ingestion()
+            data_ingestion_artifact:DataIngestionArtifact = self.start_data_ingestion()
     #         data_validation_artifact=self.start_data_validaton(data_ingestion_artifact=data_ingestion_artifact)
     #         data_transformation_artifact = self.start_data_transformation(data_validation_artifact=data_validation_artifact)
     #         model_trainer_artifact = self.start_model_trainer(data_transformation_artifact)
-    #         model_eval_artifact = self.start_model_evaluation(data_validation_artifact, model_trainer_artifact)
-    #         if not model_eval_artifact.is_model_accepted:
-    #             raise Exception("Trained model is not better than the best model")
-    #         model_pusher_artifact = self.start_model_pusher(model_eval_artifact)
+            # model_eval_artifact = self.start_model_evaluation(data_validation_artifact, model_trainer_artifact)
+            # if not model_eval_artifact.is_model_accepted:
+            #     raise Exception("Trained model is not better than the best model")
+            # model_pusher_artifact = self.start_model_pusher(model_eval_artifact)
 
-    #         TrainPipeline.is_pipeline_running=False
+            TrainPipeline.is_pipeline_running=False
           except  Exception as e:
     #         TrainPipeline.is_pipeline_running=False
              raise  SensorException(e,sys)
