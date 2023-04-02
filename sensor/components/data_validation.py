@@ -17,6 +17,10 @@ class DataValidation:
        except Exception as e:
           raise SensorException(e,sys)
    
+
+   def drop_zero_std_columns(self,dataframe:pd.DataFrame)->bool:
+      pass
+   
    def validate_number_of_columns(self,dataframe:pd.DataFrame)->bool:  
       try:
          number_of_columns=self._schema_config["columns"]
@@ -25,8 +29,28 @@ class DataValidation:
          return False
       except Exception as e:
          raise SensorException(e,sys)
-   def is_numerical_column_exist(self)->bool:
-      pass
+   
+   
+   def is_numerical_column_exist(self,dataframe:pd.DataFrame)->bool:
+      try:
+         numerical_columns=self._schema_config["numerical_columns"]
+         dataframe_columns=dataframe.columns
+         
+         numerical_column_present=True
+         missing_numerical_columns=[]
+         for num_column in numerical_columns:
+           if num_column not in dataframe_columns:
+              numerical_columns_present=False
+              missing_numerical_columns.append(num_column)
+         
+         logging.info(f"missing numerical columns:[{missing_numerical_columns}]")
+         return numerical_column_present          
+           
+      
+      except Exception as e:
+         raise SensorException(e,sys)
+   
+   
    @staticmethod
    def read_data(file_path)->pd.DataFrame:
       try:
@@ -49,7 +73,14 @@ class DataValidation:
          status=self.validate_number_of_columns(dataframe=train_dataframe)
          if not status:
             error_message=f"{error_message}Train dataframe does not contain all columns."
-         status = self.validate_number_of_column(dataframe=train_dataframe)       
+         status = self.validate_number_of_column(dataframe=test_dataframe)       
+         if not status:
+            error_message=f"{error_message}Test dataframe does not contain all columns."   
+      
+         #validate_numerical columns
+         status=self.is_numerical_column_exist(dataframe=train_dataframe)
+         if not status:
+            error_message=f"{error_message}Train dataframe does not contain all numerical columns."
       except Exception as e:   
          
          raise SensorException(e,sys)
