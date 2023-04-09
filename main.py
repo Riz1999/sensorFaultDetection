@@ -4,7 +4,8 @@ from sensor.exception import SensorException
 import os,sys
 from sensor.logger import logging 
 from sensor.pipeline import training_pipeline
-from sensor.pipeline.training_pipeline import TrainPipeline 
+from sensor.pipeline.training_pipeline import TrainPipeline
+from sensor.utils.main_utils import read_yaml_file 
 #from sensor.entity.config_entity import TrainingPipelineConfig,DataIngestionConfig
 
 if __name__ == '__main__':
@@ -43,9 +44,9 @@ if __name__ == '__main__':
 
 # def set_env_variable(env_file_path):
 
-#     if os.getenv('MONGO_DB_URL',None) is None:
-#         env_config = read_yaml_file(env_file_path)
-#         os.environ['MONGO_DB_URL']=env_config['MONGO_DB_URL']
+#      if os.getenv('MONGO_DB_URL',None) is None:
+#          env_config = read_yaml_file(env_file_path)
+#          os.environ['MONGO_DB_URL']=env_config['MONGO_DB_URL']
 
 
 # app = FastAPI()
