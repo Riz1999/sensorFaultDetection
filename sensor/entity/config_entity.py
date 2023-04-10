@@ -79,43 +79,25 @@ class ModelTrainerConfig:
         self.expected_accuracy: float = training_pipeline.MODEL_TRAINER_EXPECTED_SCORE
         self.overfitting_underfitting_threshold = training_pipeline.MODEL_TRAINER_OVER_FIITING_UNDER_FITTING_THRESHOLD
 
-# @dataclass
-# class ModelEvaluationConfig:
-#     changed_threshold_score: float = MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE
+class ModelEvaluationConfig:
 
-#     bucket_name: str = MODEL_PUSHER_BUCKET_NAME
-
-#     s3_model_key_path: str = os.path.join(MODEL_PUSHER_S3_KEY, MODEL_FILE_NAME)
-
-
-# @dataclass
-# class ModelPusherConfig:
-#     bucket_name: str = MODEL_PUSHER_BUCKET_NAME
-
-#     s3_model_key_path: str = os.path.join(MODEL_PUSHER_S3_KEY, MODEL_FILE_NAME)
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.model_evaluation_dir: str = os.path.join(
+            training_pipeline_config.artifact_dir, training_pipeline.MODEL_EVALUATION_DIR_NAME
+        )
+        self.report_file_path = os.path.join(self.model_evaluation_dir,training_pipeline.MODEL_EVALUATION_REPORT_NAME)
+        self.change_threshold = training_pipeline.MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE
 
 
-# @dataclass
-# class PredictionPipelineConfig:
-#     data_bucket_name: str = prediction_pipeline.PREDICTION_DATA_BUCKET
+class ModelPusherConfig:
 
-#     data_file_path: str = prediction_pipeline.PREDICTION_INPUT_FILE_NAME
-
-#     model_file_path: str = os.path.join(MODEL_PUSHER_S3_KEY, MODEL_FILE_NAME)
-
-#     model_bucket_name: str = prediction_pipeline.MODEL_BUCKET_NAME
-
-#     output_file_name: str = prediction_pipeline.PREDICTION_OUTPUT_FILE_NAME
-
-
-# @dataclass
-# class EvaluateModelResponse:
-#     trained_model_f1_score: float
-
-#     best_model_f1_score: float
-
-#     is_model_accepted: bool
-
-#     changed_accuracy: float
-
-#     best_model_metric_artifact: ClassificationMetricArtifact
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.model_evaluation_dir: str = os.path.join(
+            training_pipeline_config.artifact_dir, training_pipeline.MODEL_PUSHER_DIR_NAME
+        )
+        self.model_file_path = os.path.join(self.model_evaluation_dir,training_pipeline.MODEL_FILE_NAME)
+        timestamp = round(datetime.now().timestamp())
+        self.saved_model_path=os.path.join(
+            training_pipeline.SAVED_MODEL_DIR,
+            f"{timestamp}",
+            training_pipeline.MODEL_FILE_NAME)
