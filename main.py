@@ -19,13 +19,13 @@ from fastapi.middleware.cors import CORSMiddleware
 
 env_file_path=os.path.join(os.getcwd(),"env.yaml")
 
-if __name__ == '__main__':
-   try:
-      training_pipeline = TrainPipeline()
-      training_pipeline.run_pipeline()
-   except Exception as e:
-      print(e)
-      logging.exception(e)
+# if __name__ == '__main__':
+#    try:
+#       training_pipeline = TrainPipeline()
+#       training_pipeline.run_pipeline()
+#    except Exception as e:
+#       print(e)
+#       logging.exception(e)
     
     #  training_pipeline_config=TrainingPipelineConfig()
     #  data_ingestion_config=DataIngestionConfig(training_pipeline_config= training_pipeline_config)
