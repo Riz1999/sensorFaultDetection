@@ -89,7 +89,7 @@ class TrainPipeline:
     def run_pipeline(self):
           try:
              
-    #         TrainPipeline.is_pipeline_running=True
+            TrainPipeline.is_pipeline_running=True
 
             data_ingestion_artifact:DataIngestionArtifact = self.start_data_ingestion()
             data_validation_artifact=self.start_data_validaton(data_ingestion_artifact=data_ingestion_artifact)
@@ -102,5 +102,5 @@ class TrainPipeline:
 
             TrainPipeline.is_pipeline_running=False
           except  Exception as e:
-    #         TrainPipeline.is_pipeline_running=False
+             TrainPipeline.is_pipeline_running=False
              raise  SensorException(e,sys)
